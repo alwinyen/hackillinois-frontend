@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Example from './components/test.jsx'
 
 function App() {
   const [credential, setCredential] = React.useState({
@@ -16,8 +17,8 @@ function App() {
           <Route exact path="/">
             
           </Route>
-          <Route exact path="/features">
-            
+          <Route exact path="/test">
+          <Example/>
           </Route>
           <Route exact path="/about">
             
