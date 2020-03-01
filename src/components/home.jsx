@@ -25,14 +25,15 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 1
+      index: 1,
+      search: "virus",
+      searchNum: 2
     }
   }
 
   componentDidMount() {
-    axios.post('http://18.216.28.55:5000/api?query=virus&num=2', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
+    axios.post('http://18.216.28.55:5000/api?query=' + this.state.search +'&num=' + this.state.searchNum, {
+      
     })
     .then(function (data) {
       console.log(data);
@@ -40,6 +41,13 @@ class Home extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
+  }
+
+  handleSearchChange = (e) => {
+    this.setState({
+      ...this.state,
+      search: e.target.value,
+    })
   }
   render() {
 
@@ -90,6 +98,7 @@ class Home extends React.Component {
               fontSize: "1.5rem",
               outline: "none"
             }}
+            onChange = {this.handleSearchChange}
           />
         </div>
       
