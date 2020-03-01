@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Slider from "react-slick";
-import axios from 'axios';
 import { Card, Icon } from 'semantic-ui-react'
+import { GridLoader } from "react-spinners";
+import useAxios from 'axios-hooks'
+import { css } from "@emotion/core";
+
 
 const posts = [
   {
@@ -20,47 +23,43 @@ const posts = [
   }
 ]
 
-class Home extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      index: 1,
-      search: "virus",
-      searchNum: 2
-    }
-  }
-
-  componentDidMount() {
-    axios.post('http://18.216.28.55:5000/api?query=' + this.state.search +'&num=' + this.state.searchNum, {
-      
-    })
-    .then(function (data) {
-      console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  handleSearchChange = (e) => {
+function handleSearchChange(e) {
     this.setState({
       ...this.state,
       search: e.target.value,
     })
   }
-  render() {
 
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
 
-    const w = window.innerWidth - 25;
-    const h = window.innerHeight - 25; 
+function Home() {
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
+
+  const [ state, setState ] = useState({
+    index: 1,
+    search: "virus",
+    searchNum: 2,
+    result: []
+  });
+
+  const [{ data, loading, error }, refetch] = useAxios(
+    {
+      method: 'post',
+      url: 'http://18.216.28.55:5000/api?query=' + state.search +'&num=' + state.searchNum
+    }
+  )
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
 
     return (
       <div>
@@ -99,11 +98,19 @@ class Home extends React.Component {
               outline: "none",
               marginRight: "-9vh"
             }}
-            onChange = {this.handleSearchChange}
+            onChange = {handleSearchChange}
           />
           <button id = "submitBtn"> Submit ↵</button>
         </div>
-      
+        { loading ? 
+        <GridLoader
+          css={override}
+          size={150}
+          //size={"150px"} this also works
+          color={"#29CAAC"}
+          loading={loading}
+        />
+        : 
         <Slider {...settings}>
           <div>
             <Card
@@ -155,9 +162,9 @@ class Home extends React.Component {
             </Card>
           </div>
         </Slider>
+      }
       </div>
     );
-  }
 }
 
 
