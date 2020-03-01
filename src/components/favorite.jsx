@@ -52,7 +52,7 @@ const items = [
 ]
 
 
-export function CardExampleGroupCentered(){
+export function Favorite(){
   return(
     <div>
       <div id = "login"><a href = "#">Home</a></div>
@@ -119,4 +119,4 @@ export function CardExampleGroupCentered(){
   );
 }
 
-export default CardExampleGroupCentered
+export default Favorite

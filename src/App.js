@@ -4,8 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Example from './components/test.jsx'
-import CardExampleGroupCentered from './components/favourite.jsx'
+import Home from './components/home'
+import Favorite from './components/favorite'
 
 function App() {
   const [credential, setCredential] = React.useState({
@@ -16,10 +16,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            
+            <Home/>
           </Route>
-          <Route exact path="/test">
-          <CardExampleGroupCentered/>
+          <Route exact path="/home">
+            <Favorite/>
           </Route>
           <Route exact path="/about">
             

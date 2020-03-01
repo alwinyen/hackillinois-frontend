@@ -20,7 +20,7 @@ const posts = [
   }
 ]
 
-class Example extends React.Component {
+class Home extends React.Component {
 
   constructor(props) {
     super(props);
@@ -150,4 +150,4 @@ class Example extends React.Component {
 }
 
 
-export default Example;
+export default Home;
