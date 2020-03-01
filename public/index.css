@@ -59,3 +59,7 @@ img:hover{
 	color: white;
 	font-size: 1.8rem;
 }
+
+.slick-slide div {
+	margin: auto;
+  }

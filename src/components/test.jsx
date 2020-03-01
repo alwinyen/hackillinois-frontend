@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import Cube from "react-cube-navigation";
+import React from 'react'
+import Slider from "react-slick";
 import axios from 'axios';
-
+import { Card, Icon } from 'semantic-ui-react'
 
 const posts = [
   {
@@ -42,6 +42,14 @@ class Example extends React.Component {
     });
   }
   render() {
+
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
 
     const w = window.innerWidth - 25;
     const h = window.innerHeight - 25; 
@@ -114,52 +122,53 @@ class Example extends React.Component {
           </label>
         </div>
   
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50vh"
-          }}
-        >
-          <Cube
-            index={this.state.index}
-            onChange={i => console.log("AAAA:"+i)}
-            width={w > 600 ? 600 : w}
-            height={h > 400 ? 400 : h}
-            lockScrolling
-            hasNext={i => i < posts.length - 1 }
-            renderItem={(i, active) => {
-              return (
-                <div
-                  style={{
-                    backgroundColor: "rgba(248,246,245,0.95)",
-                    flex: 1,
-                    borderRadius: "0.5rem",
-                    textAlign: "center",
-                    boxShadow: "10px 10px 10px rgba(0,0,0,0.2)",
-                    padding: "1rem"
-                  }}
-                >
-                  {console.log(i)}
-                  <img src = "./images/star.svg"/>
-                  <h1>
-                    <a href = {posts[0].link}>{posts[0].title}</a>
-                  </h1>
-                  <p
-                    style = {{
-                      fontSize: "1rem"
-                    }}
-                  >
-                    {posts[0].citations}
-                  </p>
-                  <p>{posts[0].summary}</p>
-                  <a href = {posts[0].links}>Visit Source</a>
-                </div>
-              );
-            }}
-          />
-        </div>
+        <Slider {...settings}>
+          <div>
+            <Card
+              style = {{
+                width: "50vw",
+                marginRight: "25vw",
+                marginLeft: "25vw"
+              }}
+            >
+              <Card.Content header='About Amy' />
+              <Card.Content description={posts[0].summary} />
+              <Card.Content extra>
+                <Icon name='user' />4 Friends
+              </Card.Content>
+            </Card>
+          </div>
+          <div>
+            <Card
+              style = {{
+                width: "50vw",
+                marginRight: "25vw",
+                marginLeft: "25vw"
+              }}
+            >
+              <Card.Content header='About Amy' />
+              <Card.Content description={posts[0].summary} />
+              <Card.Content extra>
+                <Icon name='user' />4 Friends
+              </Card.Content>
+            </Card>
+          </div>
+          <div>
+            <Card
+              style = {{
+                width: "50vw",
+                marginRight: "25vw",
+                marginLeft: "25vw"
+              }}
+            >
+              <Card.Content header='About Amy' />
+              <Card.Content description={posts[0].summary} />
+              <Card.Content extra>
+                <Icon name='user' />4 Friends
+              </Card.Content>
+            </Card>
+          </div>
+        </Slider>
       </div>
     );
   }
