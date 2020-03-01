@@ -20,11 +20,12 @@ function Home() {
     result: [],
     random: 0
   });
+  const searchString = state.search.length == 0 ? "virus" : state.search
 
   const [{ data, loading, error }, refetch] = useAxios(
     {
       method: 'post',
-      url: 'http://18.216.28.55:5000/api?query=' + state.search.length == 0 ? "virus" : state.search +'&num=' + state.searchNum
+      url: 'http://18.216.28.55:5000/api?query=' + searchString +'&num=' + state.searchNum
     }
   )
   
