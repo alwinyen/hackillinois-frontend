@@ -4,10 +4,9 @@ body {
 	font-family: 'Odibee Sans';
 	background-image: url("./images/dj-lubelski-large.jfif");
 	background-size: 100vw;
-	background-repeat: no-repeat;
 	background-position: center;
 	background-attachment: fixed;
-	background-size: scroll;
+	background-size: cover;
 }
 #tldr{
 	color: white;
