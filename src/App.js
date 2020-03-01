@@ -19,7 +19,7 @@ function App() {
             
           </Route>
           <Route exact path="/test">
-          <Example/>
+          <CardExampleGroupCentered/>
           </Route>
           <Route exact path="/about">
             

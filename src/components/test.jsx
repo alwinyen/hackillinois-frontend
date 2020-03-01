@@ -107,7 +107,7 @@ class Example extends React.Component {
               <Card.Content header='About Amy' className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
               <Card.Content description={posts[0].summary} />
               <Card.Content extra>
-                <Icon name='i cursor' />{posts[0].citations}
+                {posts[0].citations}
               </Card.Content>
             </Card>
           </div>
