@@ -16,6 +16,16 @@ class Home extends React.Component {
       loading: false
     }
   }
+  
+  componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this))
+  }
+
+  handleKeyDown(e) {
+    if(e.key == "Enter") {
+      this.handleSubmit()
+    } 
+   }
 
   handleSearchChange(e) {
     this.setState({
@@ -53,6 +63,7 @@ class Home extends React.Component {
       // always executed
     });
   }
+  
 
   render() {
     const override = css`
@@ -69,7 +80,6 @@ class Home extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
-
     return (
       <div>
         <div id = "login"><a href = "#">login</a></div>
@@ -109,9 +119,8 @@ class Home extends React.Component {
             }}
             onChange = {this.handleSearchChange.bind(this)}
           />
-          <button id = "submitBtn" onClick={this.handleSubmit.bind(this)}> Submit ↵</button>
+            <button id = "submitBtn" onClick={this.handleSubmit.bind(this)}> Submit ↵</button>
         </div>
-      
       <Slider {...settings}>
       {
       this.state.loading ?
