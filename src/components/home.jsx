@@ -102,15 +102,7 @@ class Home extends React.Component {
         <div id = "login"><a href = "#">login</a></div>
         <StyleRoot>
           <div className="test" style={styles.fadeIn}>
-          <h1
-            style = {{
-              textAlign: "center",
-              paddingTop: "1vh",
-              color: "white",
-              fontFamily: "Odibee Sans",
-              fontSize: "5rem"
-            }}
-          >Newsies</h1>
+          <h1 id = "newsies">Newsies</h1>
           </div>
         </StyleRoot>        
 
@@ -155,7 +147,7 @@ class Home extends React.Component {
         />
       :
       this.state.result.length > 0 ?
-        this.state.result.filter(source => source.text.length > 0).map((source) => {
+        this.state.result.filter(source => source.text.length > 20).map((source) => {
           return(
             <div>
             <Card

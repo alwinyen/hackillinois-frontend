@@ -7,6 +7,21 @@ body {
 	background-position: center;
 	background-attachment: fixed;
 }
+#newsies{
+	color: white;
+	font-family: Odibee Sans;
+	font-size: 8rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin: 5vh auto;
+	width: 10vw;
+	height: 2vh;
+	border-radius: 75px;
+	transition: 1s box-shadow;
+}
+
 input::placeholder{
 	color: white;
 	font-size: 2rem;
@@ -18,7 +33,7 @@ input[type = text]{
 input:focus::placeholder{
 	opacity: 0;
 	transform: translateX(300px);
-	-webkit-transition: opacity 2s ease-in-out;
+	-webkit-transition: opacity 1.5s ease-in-out;
 	transition: all 1.5s linear
 }
 h1 {
@@ -74,6 +89,32 @@ img:hover{
 	border-radius: 0.5rem;
 	margin-bottom: 1rem;
 	margin-left: -0.5rem;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-timing-function: ease-in-out;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@keyframes bounce { 
+	0%, 100%, 20%, 50%, 80% {
+		-webkit-transform: translateY(0);
+		-ms-transform:     translateY(0);
+		transform:         translateY(0)
+	}
+	40% {
+		-webkit-transform: translateY(-30px);
+		-ms-transform:     translateY(-30px);
+		transform:         translateY(-30px)
+	}
+	60% {
+		-webkit-transform: translateY(-15px);
+		-ms-transform:     translateY(-15px);
+		transform:         translateY(-15px)
+	}
 }
 
 #submitBtn:hover span{ 
@@ -81,7 +122,8 @@ img:hover{
 }
 
 #submitBtn:hover {
-	font-style: italic;
+	-webkit-animation-name: bounce; 
+    animation-name: bounce; 
 	cursor: pointer;
 }
 
