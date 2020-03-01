@@ -90,16 +90,18 @@ class Home extends React.Component {
             style = {{
               fontFamily: "Odibee Sans",
               backgroundColor: "transparent",
-              width: "50vw",
+              width: "50.5vw",
               height: "5vh",
               border: "none",
               borderBottom: "0.2rem solid white",
               padding: "0.3rem",
               fontSize: "1.5rem",
-              outline: "none"
+              outline: "none",
+              marginRight: "-9vh"
             }}
             onChange = {this.handleSearchChange}
           />
+          <button id = "submitBtn"> Submit ↵</button>
         </div>
       
         <Slider {...settings}>
