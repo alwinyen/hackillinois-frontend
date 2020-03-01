@@ -30,22 +30,15 @@ body {
 }
 @keyframes changeIntro {
   from {color: white;}
-  to { color: #F78DA1; font-style: italic;}
+  to { color: #F78DA1;} 
+}
+@keyframes changeIntroB {
+  from {}
+  to { font-style: italic; }
 }
 #intro strong{
-	animation: changeIntro 2s infinite;
-}
-/*@keyframes changeHr {
-  from { width: 0; }
-  to { width: 42vw; 
-	transition: width 1s linear;}
-}
-hr{
-	width: 0;
-	border: 2px solid white;
-	animation: changeHr 2s;
-}*/
-
+	animation: changeIntro 2s infinite, changeIntroB 2s infinite;
+}	
 input::placeholder{
 	color: white;
 	font-size: 2rem;
