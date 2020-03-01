@@ -1,9 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import Slider from "react-slick";
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Icon, Popup } from 'semantic-ui-react'
 import { BounceLoader } from "react-spinners";
 import axios from 'axios'
 import { css } from "@emotion/core";
+import copy from "copy-to-clipboard";
+import { fadeIn } from 'react-animations'
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+  fadeIn: {
+    animation: 'x 8s',
+    animationName: Radium.keyframes(fadeIn, 'fadeIn')
+  }
+}
 
 class Home extends React.Component {
 
@@ -13,8 +23,14 @@ class Home extends React.Component {
       search: "virus",
       searchNum: 5,
       result: [],
-      loading: false
+      loading: false,
+      textToCopy: ""
     }
+    this.handleCopy = this.handleCopy.bind(this);
+  }
+
+  handleCopy() {
+    copy(this.state.textToCopy);
   }
   
   componentWillMount(){
@@ -66,6 +82,7 @@ class Home extends React.Component {
   
 
   render() {
+
     const override = css`
     display: block;
     margin: 0 auto;
@@ -83,16 +100,20 @@ class Home extends React.Component {
     return (
       <div>
         <div id = "login"><a href = "#">login</a></div>
-        <h1
-          style = {{
-            textAlign: "center",
-            paddingTop: "1vh",
-            color: "white",
-            fontFamily: "Odibee Sans",
-            fontSize: "5rem"
-          }}
-        >
-        Newsies</h1>
+        <StyleRoot>
+          <div className="test" style={styles.fadeIn}>
+          <h1
+            style = {{
+              textAlign: "center",
+              paddingTop: "1vh",
+              color: "white",
+              fontFamily: "Odibee Sans",
+              fontSize: "5rem"
+            }}
+          >Newsies</h1>
+          </div>
+        </StyleRoot>        
+
         <div
           style = {{
               display: "flex",
@@ -106,6 +127,7 @@ class Home extends React.Component {
             type = "text" 
             placeholder = "Search..."
             style = {{
+              caretColor: "white",
               fontFamily: "Odibee Sans",
               backgroundColor: "transparent",
               width: "50.5vw",
@@ -113,20 +135,20 @@ class Home extends React.Component {
               border: "none",
               borderBottom: "0.2rem solid white",
               padding: "0.1rem",
-              fontSize: "1.5rem",
+              fontSize: "2rem",
               outline: "none",
               marginRight: "-9vh"
             }}
             onChange = {this.handleSearchChange.bind(this)}
           />
-            <button id = "submitBtn" onClick={this.handleSubmit.bind(this)}> Submit ↵</button>
+            <button id = "submitBtn" onClick={this.handleSubmit.bind(this)}> Submit <span>↵</span></button>
         </div>
       <Slider {...settings}>
       {
       this.state.loading ?
       <BounceLoader
           css={override}
-          size={150}
+          size={200}
           //size={"150px"} this also works
           color={"#FFF"}
           loading={this.state.loading}
@@ -146,11 +168,15 @@ class Home extends React.Component {
               }}
               key = {source._id}
             >
-              <a href = {source.url}><Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/></a>
-              <Card.Content description={source.text.length <= 2000 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,2000).lastIndexOf(" ")) + "..."} />
-              <Card.Content extra>
-                {source.citation}
-              </Card.Content>
+              <a a target = "_blank" id = "cardLink" href = {source.url}><Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/></a>
+              <Card.Content description={source.text.length <= 1500 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,1200).lastIndexOf(" ")) + "..."} />
+              
+              <Popup content='Citation Copied' position='right center' on = "click" 
+                mouseLeaveDelay={0} basic style = {{cursor: "pointer"}} trigger={
+                <Card.Content extra onClick={() => {this.setState({textToCopy: source.citation}); this.handleCopy()}}>
+                  {source.citation}
+                </Card.Content>
+              }/>
             </Card>
           </div>
           )
