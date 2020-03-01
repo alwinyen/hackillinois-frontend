@@ -2,64 +2,73 @@ import React, {useState, useEffect} from 'react'
 import Slider from "react-slick";
 import { Card, Icon } from 'semantic-ui-react'
 import { BounceLoader } from "react-spinners";
-import useAxios from 'axios-hooks'
+import axios from 'axios'
 import { css } from "@emotion/core";
 
-function Home() {
+class Home extends React.Component {
 
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
-
-  const [ state, setState ] = useState({
-    index: 1,
-    search: "virus",
-    searchNum: 5,
-    result: [],
-    random: 0
-  });
-  const searchString = state.search.length == 0 ? "virus" : state.search
-
-  const [{ data, loading, error }, refetch] = useAxios(
-    {
-      method: 'post',
-      url: 'http://18.216.28.55:5000/api?query=' + searchString +'&num=' + state.searchNum
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: "virus",
+      searchNum: 5,
+      result: [],
+      loading: false
     }
-  )
-  
-  useEffect( () => {
-    const loadData = async () => {
-      if(!loading) {
-        setState({...state, result: data})
-      }
-    };
-    loadData()
-  }, [state.random]);
+  }
 
-  function handleSearchChange(e) {
-    setState({
-      ...state,
+  handleSearchChange(e) {
+    this.setState({
+      ...this.state,
       search: e.target.value,
     })
   }
-
-  function handleSubmit() {
-    setState({
-      ...state,
-      random: state.random + 1,
+ handleSubmit = () => {
+    this.setState({
+      ...this.state,
+      loading: true
     })
+
+    const outsideThis = this
+
+    axios.post('http://18.216.28.55:5000/api?query=' + this.state.search +'&num=' + this.state.searchNum)
+    .then(function (response) {
+      // handle success
+      console.log(response);
+
+      outsideThis.setState({
+        ...outsideThis.state,
+        result: response.data.sources
+      })
+      outsideThis.setState({
+        ...outsideThis.state,
+        loading: false
+      })
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
   }
 
-  
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+  render() {
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+    `;
+
+      
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
 
     return (
       <div>
@@ -98,48 +107,50 @@ function Home() {
               outline: "none",
               marginRight: "-9vh"
             }}
-            onChange = {handleSearchChange}
+            onChange = {this.handleSearchChange.bind(this)}
           />
-          <button id = "submitBtn" onClick={handleSubmit}> Submit ↵</button>
+          <button id = "submitBtn" onClick={this.handleSubmit.bind(this)}> Submit ↵</button>
         </div>
-        { loading ? 
-        <BounceLoader
+      
+      <Slider {...settings}>
+      {
+      this.state.loading ?
+      <BounceLoader
           css={override}
           size={150}
           //size={"150px"} this also works
           color={"#FFF"}
-          loading={loading}
+          loading={this.state.loading}
         />
-        : 
-        <Slider {...settings}>
-          {data.sources.map((source) => {
-            console.log(source)
-              return(
-                <div>
-                  <Card
-                    style = {{
-                      width: "50vw",
-                      marginRight: "25vw",
-                      marginLeft: "25vw",
-                      fontSize: "1.5rem",
-                      fontFamily: "Odibee Sans"
-                    }}
-                    key = {source._id}
-                  >
-                    <Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
-                    <Card.Content description={source.text.length <= 2000 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,2000).lastIndexOf(" ")) + "..."} />
-                    {console.log(source.text)}
-                    <Card.Content extra>
-                      {source.citations}
-                    </Card.Content>
-                  </Card>
-                </div>
-              )
-            })}
-        </Slider>
+      :
+      this.state.result.length > 0 ?
+        this.state.result.map((source) => {
+          return(
+            <div>
+            <Card
+              style = {{
+                width: "50vw",
+                marginRight: "25vw",
+                marginLeft: "25vw",
+                fontSize: "1.5rem",
+                fontFamily: "Odibee Sans"
+              }}
+              key = {source._id}
+            >
+              <Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
+              <Card.Content description={source.text.length <= 2000 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,2000).lastIndexOf(" ")) + "..."} />
+              <Card.Content extra>
+                {source.citation}
+              </Card.Content>
+            </Card>
+          </div>
+          )
+        }) : ""
       }
+      </Slider>
       </div>
     );
+  }
 }
 
 

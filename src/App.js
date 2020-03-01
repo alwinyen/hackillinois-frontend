@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from './components/home'
 import Favorite from './components/favorite'
+import Login from './components/login'
 
 function App() {
   const [credential, setCredential] = React.useState({
@@ -21,10 +22,9 @@ function App() {
           <Route exact path="/home">
             <Favorite/>
           </Route>
-          <Route exact path="/about">
-            
+          <Route exact path="/login">
+            <Login/>
           </Route>
-          {/* <Route component={NotFound}/> */}
         </Switch>
       </Router>
     </React.Fragment>
