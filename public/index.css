@@ -7,7 +7,7 @@ body {
 	background-position: center;
 	background-attachment: fixed;
 }
-#newsies{
+#tldr{
 	color: white;
 	font-family: Odibee Sans;
 	font-size: 8rem;
@@ -15,12 +15,36 @@ body {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	margin: 5vh auto;
+	margin: 10vh auto;
 	width: 10vw;
 	height: 2vh;
-	border-radius: 75px;
-	transition: 1s box-shadow;
 }
+#intro{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 4rem;
+	margin-bottom: 0;
+	margin-top: 10rem;
+}
+@keyframes changeIntro {
+  from {color: white;}
+  to { color: #F78DA1; font-style: italic;}
+}
+#intro strong{
+	animation: changeIntro 2s infinite;
+}
+/*@keyframes changeHr {
+  from { width: 0; }
+  to { width: 42vw; 
+	transition: width 1s linear;}
+}
+hr{
+	width: 0;
+	border: 2px solid white;
+	animation: changeHr 2s;
+}*/
 
 input::placeholder{
 	color: white;
@@ -32,9 +56,9 @@ input[type = text]{
 }
 input:focus::placeholder{
 	opacity: 0;
-	transform: translateX(300px);
-	-webkit-transition: opacity 1.5s ease-in-out;
-	transition: all 1.5s linear
+	transform: translateX(15vw);
+	-webkit-transition: opacity 0.5s ease-in-out;
+	transition: all 0.5s linear
 }
 h1 {
 	font-size: 3rem;

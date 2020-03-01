@@ -99,10 +99,10 @@ class Home extends React.Component {
     };
     return (
       <div>
-        <div id = "login"><a href = "#">login</a></div>
+        <div id = "login"></div>
         <StyleRoot>
           <div className="test" style={styles.fadeIn}>
-          <h1 id = "newsies">Newsies</h1>
+          <h1 id = "tldr">TL;DR</h1>
           </div>
         </StyleRoot>        
 
@@ -173,26 +173,9 @@ class Home extends React.Component {
           </div>
           )
         }) :
-        <div>
-          <Card
-            style = {{
-              width: "50vw",
-              marginRight: "25vw",
-              marginLeft: "25vw",
-              fontSize: "1.5rem",
-              fontFamily: "Odibee Sans"
-            }}
-          >
-            <a a target = "_blank" id = "cardLink" href = {null}><Card.Content header={"Intro"} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/></a>
-            <Card.Content description={"Description"} />
-            
-            <Popup content='Citation Copied' position='right center' on = "click" 
-              mouseLeaveDelay={0} basic style = {{cursor: "pointer"}} trigger={
-              <Card.Content extra >
-                {"Link"}
-              </Card.Content>
-            }/>
-          </Card>
+        <div id="introWrapper">
+          <p id="intro">We make research<strong>&nbsp;faster&nbsp;</strong>&nbsp;and&nbsp;<strong>&nbsp;easier!</strong></p>
+          
         </div>
       }
       </Slider>
