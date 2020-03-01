@@ -146,7 +146,7 @@ class Home extends React.Component {
               }}
               key = {source._id}
             >
-              <Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
+              <a href = "#"><Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/></a>
               <Card.Content description={source.text.length <= 2000 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,2000).lastIndexOf(" ")) + "..."} />
               <Card.Content extra>
                 {source.citation}
