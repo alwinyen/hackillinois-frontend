@@ -7,6 +7,7 @@ import {
 import Home from './components/home'
 import Favorite from './components/favorite'
 import Login from './components/login'
+import Reference from './components/reference'
 
 function App() {
   const [credential, setCredential] = React.useState({
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <Login/>
+          </Route>
+          <Route exact path="/reference">
+            <Reference/>
           </Route>
         </Switch>
       </Router>
