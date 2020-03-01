@@ -5,6 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import Example from './components/test.jsx'
+import CardExampleGroupCentered from './components/favourite.jsx'
 
 function App() {
   const [credential, setCredential] = React.useState({

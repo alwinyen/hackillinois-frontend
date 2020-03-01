@@ -57,13 +57,23 @@ class Example extends React.Component {
     return (
       <div>
         <div id = "login"><a href = "#">login</a></div>
+        <h1
+          style = {{
+            textAlign: "center",
+            paddingTop: "1vh",
+            color: "white",
+            fontFamily: "Odibee Sans",
+            fontSize: "5rem"
+          }}
+        >
+        Newsies</h1>
         <div
           style = {{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               height: "25vh",
-              marginBottom: "-5vh"
+              marginBottom: "5vh"
           }}
         >
           <input 
@@ -72,7 +82,7 @@ class Example extends React.Component {
             style = {{
               fontFamily: "Odibee Sans",
               backgroundColor: "transparent",
-              width: "40vw",
+              width: "50vw",
               height: "5vh",
               border: "none",
               borderBottom: "0.2rem solid white",
@@ -82,53 +92,32 @@ class Example extends React.Component {
             }}
           />
         </div>
-  
-        <div
-          style = {{
-              color: "white",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "5vh",
-              marginBottom: "10vh"
-          }}
-        >
-          <input type="radio" id="apa" name="citationStyle" value="apa"/>
-          <label 
-            for="apa"
-            style = {{
-              marginRight: "1%"
-            }}
-          >
-            APA
-          </label>
-          <input type="radio" id="mla" name="citationStyle" value="mla"/>
-          <label 
-            for="mla"
-            style = {{
-              marginRight: "1%"
-            }}
-          >
-            MLA
-          </label>
-          <input type="radio" id="chicago" name="citationStyle" value="chicago"/>
-          <label 
-            for="chicago"
-            style = {{
-              marginRight: "1%"
-            }}
-          >
-            Chicago
-          </label>
-        </div>
-  
+      
         <Slider {...settings}>
           <div>
             <Card
               style = {{
                 width: "50vw",
                 marginRight: "25vw",
-                marginLeft: "25vw"
+                marginLeft: "25vw",
+                fontSize: "1.5rem",
+                fontFamily: "Odibee Sans"
+              }}
+            >
+              <Card.Content header='About Amy' className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
+              <Card.Content description={posts[0].summary} />
+              <Card.Content extra>
+                <Icon name='i cursor' />{posts[0].citations}
+              </Card.Content>
+            </Card>
+          </div>
+          <div>
+            <Card
+              style = {{
+                width: "50vw",
+                marginRight: "25vw",
+                marginLeft: "25vw",
+                fontSize: "1.5rem"
               }}
             >
               <Card.Content header='About Amy' />
@@ -143,22 +132,8 @@ class Example extends React.Component {
               style = {{
                 width: "50vw",
                 marginRight: "25vw",
-                marginLeft: "25vw"
-              }}
-            >
-              <Card.Content header='About Amy' />
-              <Card.Content description={posts[0].summary} />
-              <Card.Content extra>
-                <Icon name='user' />4 Friends
-              </Card.Content>
-            </Card>
-          </div>
-          <div>
-            <Card
-              style = {{
-                width: "50vw",
-                marginRight: "25vw",
-                marginLeft: "25vw"
+                marginLeft: "25vw",
+                fontSize: "1.5rem",
               }}
             >
               <Card.Content header='About Amy' />
