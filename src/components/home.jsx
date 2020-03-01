@@ -5,24 +5,6 @@ import { BounceLoader } from "react-spinners";
 import useAxios from 'axios-hooks'
 import { css } from "@emotion/core";
 
-
-const posts = [
-  {
-    images: "https://images.unsplash.com/photo-1565371557106-c2abcc6fb36a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-    title:  "Title 1",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    link: "Link 1",
-    citations: "Dean, Cornelia. \"Executive on a Mission: Saving the Planet.\" The New York Times, 22 May 2007, www.nytimes.com/2007/05/22/science/earth/22ander.html?_r=0. Accessed 29 May 2019.Link 1"
-  },
-  {
-    images: "https://images.unsplash.com/photo-1565371557106-c2abcc6fb36a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-    title:  "Title 2",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    link: "Link 2",
-    citations: "Dean, Cornelia. \"Executive on a Mission: Saving the Planet.\" The New York Times, 22 May 2007, www.nytimes.com/2007/05/22/science/earth/22ander.html?_r=0. Accessed 29 May 2019.Link 1"
-  }
-]
-
 function Home() {
 
   const override = css`
@@ -96,8 +78,8 @@ function Home() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "25vh",
-              marginBottom: "5vh"
+              height: "20vh",
+              marginBottom: "-3vh"
           }}
         >
           <input 
@@ -110,7 +92,7 @@ function Home() {
               height: "5vh",
               border: "none",
               borderBottom: "0.2rem solid white",
-              padding: "0.3rem",
+              padding: "0.1rem",
               fontSize: "1.5rem",
               outline: "none",
               marginRight: "-9vh"
@@ -144,7 +126,8 @@ function Home() {
                     key = {source._id}
                   >
                     <Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
-                    <Card.Content description={source.text.length < 2500 ? source.text : source.text.substring(0,2500) + "..."} />
+                    <Card.Content description={source.text.length <= 2000 ? source.text : (source.text.substring(0,2000)).substring(0, source.text.substring(0,2000).lastIndexOf(" ")) + "..."} />
+                    {console.log(source.text)}
                     <Card.Content extra>
                       {source.citations}
                     </Card.Content>
