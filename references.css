@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
+
+body {
+	font-family: 'Odibee Sans';
+	background-image: url("dj-lubelski-large.jfif");
+	background-size: 100vw;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+#referenceWrapper {
+	background-color: rgba(248,246,245,0.7);
+	margin-left: 10vw;
+	margin-right: 10vw;
+    width: 80vw;
+	margin-top: 7vh;
+	margin-bottom: 7vh;
+	text-align: center;
+	padding: 1rem;
+}
+
+#referenceWrapper h1{
+	font-size: 3rem;
+}
+
+#referenceWrapper p{
+	font-size: 1.3rem;
+}
+#home{
+	padding-top: 2vh;
+	font-size: 1.8rem;
+	margin-left: 95vw;
+}
+
+#home a{
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+}
+
+#home a:hover{
+	color: white;
+}
