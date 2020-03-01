@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Slider from "react-slick";
 import { Card, Icon } from 'semantic-ui-react'
-import { GridLoader } from "react-spinners";
+import { BounceLoader } from "react-spinners";
 import useAxios from 'axios-hooks'
 import { css } from "@emotion/core";
 
@@ -103,11 +103,11 @@ function Home() {
           <button id = "submitBtn"> Submit ↵</button>
         </div>
         { loading ? 
-        <GridLoader
+        <BounceLoader
           css={override}
           size={150}
           //size={"150px"} this also works
-          color={"#29CAAC"}
+          color={"#FFF"}
           loading={loading}
         />
         : 
