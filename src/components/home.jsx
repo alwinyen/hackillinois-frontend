@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Slider from "react-slick";
 import { Card, Icon } from 'semantic-ui-react'
 import { BounceLoader } from "react-spinners";
@@ -23,14 +23,6 @@ const posts = [
   }
 ]
 
-function handleSearchChange(e) {
-    this.setState({
-      ...this.state,
-      search: e.target.value,
-    })
-  }
-
-
 function Home() {
 
   const override = css`
@@ -42,8 +34,9 @@ function Home() {
   const [ state, setState ] = useState({
     index: 1,
     search: "virus",
-    searchNum: 2,
-    result: []
+    searchNum: 5,
+    result: [],
+    random: 0
   });
 
   const [{ data, loading, error }, refetch] = useAxios(
@@ -52,7 +45,31 @@ function Home() {
       url: 'http://18.216.28.55:5000/api?query=' + state.search +'&num=' + state.searchNum
     }
   )
+  
+  useEffect( () => {
+    const loadData = async () => {
+      if(!loading) {
+        setState({...state, result: data})
+      }
+    };
+    loadData()
+  }, [state.random]);
 
+  function handleSearchChange(e) {
+    setState({
+      ...state,
+      search: e.target.value,
+    })
+  }
+
+  function handleSubmit() {
+    setState({
+      ...state,
+      random: state.random + 1,
+    })
+  }
+
+  
   var settings = {
     dots: true,
     infinite: true,
@@ -100,7 +117,7 @@ function Home() {
             }}
             onChange = {handleSearchChange}
           />
-          <button id = "submitBtn"> Submit ↵</button>
+          <button id = "submitBtn" onClick={handleSubmit}> Submit ↵</button>
         </div>
         { loading ? 
         <BounceLoader
@@ -112,55 +129,29 @@ function Home() {
         />
         : 
         <Slider {...settings}>
-          <div>
-            <Card
-              style = {{
-                width: "50vw",
-                marginRight: "25vw",
-                marginLeft: "25vw",
-                fontSize: "1.5rem",
-                fontFamily: "Odibee Sans"
-              }}
-            >
-              <Card.Content header='About Amy' className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
-              <Card.Content description={posts[0].summary} />
-              <Card.Content extra>
-                {posts[0].citations}
-              </Card.Content>
-            </Card>
-          </div>
-          <div>
-            <Card
-              style = {{
-                width: "50vw",
-                marginRight: "25vw",
-                marginLeft: "25vw",
-                fontSize: "1.5rem"
-              }}
-            >
-              <Card.Content header='About Amy' />
-              <Card.Content description={posts[0].summary} />
-              <Card.Content extra>
-                <Icon name='user' />4 Friends
-              </Card.Content>
-            </Card>
-          </div>
-          <div>
-            <Card
-              style = {{
-                width: "50vw",
-                marginRight: "25vw",
-                marginLeft: "25vw",
-                fontSize: "1.5rem",
-              }}
-            >
-              <Card.Content header='About Amy' />
-              <Card.Content description={posts[0].summary} />
-              <Card.Content extra>
-                <Icon name='user' />4 Friends
-              </Card.Content>
-            </Card>
-          </div>
+          {data.sources.map((source) => {
+            console.log(source)
+              return(
+                <div>
+                  <Card
+                    style = {{
+                      width: "50vw",
+                      marginRight: "25vw",
+                      marginLeft: "25vw",
+                      fontSize: "1.5rem",
+                      fontFamily: "Odibee Sans"
+                    }}
+                    key = {source._id}
+                  >
+                    <Card.Content header={source.title} className = "cards" style = {{fontFamily: "Odibee Sans!important"}}/>
+                    <Card.Content description={source.text.length < 2500 ? source.text : source.text.substring(0,2500) + "..."} />
+                    <Card.Content extra>
+                      {source.citations}
+                    </Card.Content>
+                  </Card>
+                </div>
+              )
+            })}
         </Slider>
       }
       </div>
