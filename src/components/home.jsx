@@ -59,7 +59,7 @@ class Home extends React.Component {
 
     axios.post('https://b84aa47e.ngrok.io/api?query=' + this.state.search +'&num=' + this.state.searchNum)
     .then(function (response) {
-      // handle success
+
       console.log(response);
 
       outsideThis.setState({
